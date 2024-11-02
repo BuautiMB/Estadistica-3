@@ -1,0 +1,12 @@
+---
+title: "Demostaciones Estadística III"
+author: "Bautista Martina Baldi"
+date: "2024-10"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+A continuación se enuncian las demostraciones más probables de Estadística III de la FCE-UNC. 

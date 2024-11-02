@@ -1,0 +1,214 @@
+---
+output: 
+  html_document:
+    toc: true # Activa el índice
+    toc_float: true # Muestra el índice flotante
+    css: styles.css
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+<div class="header-section">
+  <h1>Demostraciones Estadística III</h1>
+  <p>Bautista Martina Baldi - bautista.martina.baldi\@mi.unc.edu.ar</p>
+  <p>2024-10</p>
+</div>
+
+
+# Introducción
+
+A continuación se enuncian las demostraciones más probables para el final de la materia Estadística III de la FCE-UNC.
+
+## Índice
+
+- [Demostración 1](#demostración-1)  <!-- Enlace a la sección -->
+- [Demostración 3](#demostración-3) 
+- [Demostración 4](#demostración-4) 
+- [Elementos importantes](#Elementos importantes) 
+
+## Demostración 1 {#demostración-1} 
+
+Sea \(X\) una variable definida sobre un espacio de probabilidad \((\Omega; F; P)\). Demostrar que la probabilidad inducida por \(X\) verifica el axioma de \(\sigma\)-aditividad.
+
+En primera instancia se define el significado de probabilidad inducida por \(X\). La probabilidad inducida por \(X\) sobre un conjunto \(B\) es \(P_{X}(B) = P(X^{-1}(B))\), donde \(X^{-1}(B)\) es el conjunto de todos los elementos de \(\Omega\) que son mapeados en \(B\) (por \(X\) en \(B\)).
+
+Consideremos una secuencia de conjuntos \(B_{1}, B_{2}, \ldots \in F\).
+
+Se quiere demostrar que 
+
+$$
+P_{X}\left(\bigcup_{i=1}^{\infty} B_{i}\right) = \sum_{i=1}^{\infty} P_{X}(B_{i}).
+$$
+
+Utilizando la definición de probabilidad inducida por \(X\), se tiene que 
+
+$$
+P_{X}\left(\bigcup_{i=1}^{\infty} B_{i}\right) = P\left(X^{-1}\left(\bigcup_{i=1}^{\infty} B_{i}\right)\right).
+$$
+
+Como los conjuntos \(B_{i}\) son disjuntos, entonces los conjuntos \(X^{-1}(B_{i})\) también lo son, porque \(X\) es una función. Entonces: 
+
+$$
+X^{-1}\left(\bigcup_{i=1}^{\infty} B_{i}\right) = \bigcup_{i=1}^{\infty} X^{-1}(B_{i}).
+$$
+
+Luego, haciendo uso de la propiedad de \(\sigma\)-aditividad de la medida de probabilidad \(P\), se tiene que: 
+
+$$
+P\left(X^{-1}\left(\bigcup_{i=1}^{\infty} B_{i}\right)\right) = P\left(\bigcup_{i=1}^{\infty} X^{-1}(B_{i})\right) = \sum_{i=1}^{\infty} P(X^{-1}(B_{i})).
+$$
+
+Por lo tanto, la probabilidad inducida por \(X\) verifica el axioma de \(\sigma\)-aditividad.
+
+## Demostración 3 {#demostración-3}
+
+Demostrar subaditividad finita, es decir que 
+
+$$
+P\left(\bigcup_{i=1}^{n} A_{i}\right) \leq \sum_{i=1}^{n} P(A_{i}).
+$$
+
+Sea \( A_{i} \) un conjunto que pertenece a \( F \), se demostrará por inducción que 
+
+$$
+P\left(\bigcup_{i=1}^{n} A_{i}\right) \leq \sum_{i=1}^{n} P(A_{i}).
+$$
+
+1. **Caso base**: \( n=2 \) (por ser el menor número de conjuntos que se pueden unir).
+
+   $$ 
+   P(A_{1} \cup A_{2}) \leq P(A_{1}) + P(A_{2}) 
+   $$
+
+   Se cumple que: 
+   $$ 
+   A_{1} \cup A_{2} = (A_{1} - A_{2}) \cup (A_{1} \cap A_{2}) \cup (A_{2} - A_{1}) 
+   $$
+
+   Como la unión es disjunta y por axioma 3 de medida de probabilidad, es posible tomarle probabilidad a lo anterior:
+
+   $$
+   P(A_{1} \cup A_{2}) = P(A_{1} - A_{2}) + P(A_{1} \cap A_{2}) + P(A_{2} - A_{1})
+   $$
+
+   Como \( A_{1} - A_{2} = A_{1} - (A_{1} \cap A_{2}) \) y \( A_{2} - A_{1} = A_{2} - (A_{1} \cap A_{2}) \).
+
+   Entonces 
+
+   $$
+   P(A_{1} \cup A_{2}) = P\left[A_{1} - (A_{1} \cap A_{2})\right] + P(A_{1} \cap A_{2}) + P\left[A_{2} - (A_{1} \cap A_{2})\right]
+   $$
+
+   Como la intersección está contenida en cada una de las diferencias, la probabilidad de la diferencia es igual a la diferencia de las probabilidades, por ende:
+
+   $$
+   P(A_{1} \cup A_{2}) = P(A_{1}) - P(A_{1} \cap A_{2}) + P(A_{1} \cap A_{2}) + P(A_{2}) - P(A_{1} \cap A_{2}) 
+   $$
+
+   $$ 
+   P(A_{1} \cup A_{2}) = P(A_{1}) + P(A_{2}) - P(A_{1} \cap A_{2}) 
+   $$
+
+   Así se da que 
+
+   $$
+   P(A_{1} \cup A_{2}) \leq P(A_{1}) + P(A_{2}) 
+   $$
+
+2. **Caso inductivo**: A través de la hipótesis inductiva se supone que se cumple para \( n=k \), por lo tanto se debe demostrar que se cumpla para \( n=k+1 \).
+
+   HI) \( P\left(\bigcup_{i=1}^{k} A_{i}\right) \leq \sum_{i=1}^{k} P(A_{i}) \) (se supone cierto para \( n=k \))  
+   
+   TI) \( P\left(\bigcup_{i=1}^{k+1} A_{i}\right) \leq \sum_{i=1}^{k+1} P(A_{i}) \) (se demuestra para \( n=k+1 \))
+
+   $$
+   P\left(\bigcup_{i=1}^{k+1} A_{i}\right) = P\left(\left(\bigcup_{i=1}^{k} A_{i}\right) \cup A_{k+1}\right)
+   $$
+
+   $$
+   P\left(\bigcup_{i=1}^{k+1} A_{i}\right) \leq P\left(\bigcup_{i=1}^{k} A_{i}\right) + P(A_{k+1}) \leq \sum_{i=1}^{k} P(A_{i}) + P(A_{k+1}) = \sum_{i=1}^{k+1} P(A_{i}) 
+   $$
+
+   De esta manera queda demostrado que:
+
+   $$
+   P\left(\bigcup_{i=1}^{k+1} A_{i}\right) \leq \sum_{i=1}^{k+1} P(A_{i})
+   $$
+
+## Demostración 4 {#demostración-4}
+
+Demostrar el teorema de la probabilidad compuesta. El mismo enuncia que sea \( (\Omega, F,P) \) un espacio de probabilidad, entonces:
+
+i) 
+$$ 
+P(A \cap B) = P(A) \cdot P(B|A) = P(B) \cdot P(A|B) \quad \forall A,B \in F 
+$$ 
+
+ii) 
+$$ 
+P\left(\bigcap_{i=1}^{n} A_{i}\right) = \prod_{i=1}^{n} P(A_{i}| \bigcap_{k=1}^{i-1} A_{k}) \quad \forall A_{1},...,A_{n} \in F 
+$$ 
+
+Se realiza la demostración vía inducción matemática.
+
+1. **Caso base**: \( n=2 \) por ser el menor número de conjuntos que se pueden intersecar.
+
+   Siendo \( A=A_{1} \) y \( B=A_{2} \), se tiene que:
+
+   $$ 
+   P(A \cap B) = P(A) \cdot P(B|A) 
+   $$
+
+   $$ 
+   \updownarrow 
+   $$
+
+   $$ 
+   P(A_{1}\cap A_{2}) = P(A_{1}) \cdot P(A_{2}|A_{1}) 
+   $$
+
+2. **Caso inductivo**: \( n=k+1 \)
+
+   HI) 
+   $$ 
+   P\left(\bigcap_{i=1}^{k} A_{i}\right) = \prod_{i=1}^{k} P(A_{i}|\bigcap_{j=1}^{i-1} A_{j}) 
+   $$ 
+   (se supone cierto para un \( n=k \))
+
+   TI) 
+   $$ 
+   P\left(\bigcap_{i=1}^{k+1} A_{i}\right) = \prod_{i=1}^{k+1} P(A_{i}|\bigcap_{j=1}^{i-1} A_{j}) 
+   $$ 
+   (se demuestra para un \( n=k+1 \))
+
+   $$ 
+   P\left(\bigcap_{i=1}^{k+1} A_{i}\right) = P\left(\bigcap_{i=1}^{k} A_{i} \cap A_{k+1}\right) 
+   $$
+
+   Pero por caso base se tiene que 
+
+   $$
+   P\left(\bigcap_{i=1}^{k+1} A_{i}\right) = P\left(\bigcap_{i=1}^{k} A_{i} \cap A_{k+1}\right) = P\left(\bigcap_{i=1}^{k} A_{i}\right) \cdot P(A_{k+1} | \bigcap_{i=1}^{k} A_{i}) 
+   $$
+
+   $$
+   = \prod_{i=1}^{k} P(A_{i} | \bigcap_{j=1}^{i-1} A_{j}) \cdot P(A_{k+1} | \bigcap_{i=1}^{k} A_{i}) = \prod_{i=1}^{k+1} P(A_{i} | \bigcap_{j=1}^{i-1} A_{j}) 
+   $$
+
+   Así queda demostrado que 
+
+   $$
+   P\left(\bigcap_{i=1}^{k+1} A_{i}\right) = \prod_{i=1}^{k+1} P(A_{i} | \bigcap_{j=1}^{i-1} A_{j}) 
+   $$
+
+## Elementos importantes {#Elementos importantes}
+
+Los siguientes elementos \( \in F \): 
+
+$$
+[X \leq x] = X^{-1}(-\infty, x] = X \in (-\infty, x] = \{\omega \in \Omega: X(\omega) \in (-\infty, x]\}
+$$
